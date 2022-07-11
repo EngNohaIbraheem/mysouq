@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:my_souq/app/screens/auth_screen.dart';
+import 'package:my_souq/router.dart';
 import 'components/declarations.dart';
 
 void main() {
@@ -26,11 +27,8 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      home: Scaffold(
-          appBar: AppBar(title: const Text("My Souq"),),
-          body: const
-          Center(child: Text('Flutter Demo Home Page'))
-      ),
+      onGenerateRoute: (settings) => generateRoute(settings) ,
+      home: const AuthScreen()
     );
   }
 }
