@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'components/declarations.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,11 +15,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Souq',
       theme: ThemeData(
-
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Declarations.backgroundColor,
+        colorScheme: const ColorScheme.light(
+          primary: Declarations.secondaryColor,
+        ),
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: Colors.black
+          )
+        )
       ),
-      home: const Text('Flutter Demo Home Page'),
+      home: Scaffold(
+          appBar: AppBar(title: const Text("My Souq"),),
+          body: const
+          Center(child: Text('Flutter Demo Home Page'))
+      ),
     );
   }
 }
+
+
 
