@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+String myUri01 = "http://localhost:3020";
+
 class Declarations {
 
   static const appBarGradient = LinearGradient(
