@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_souq/components/declarations.dart';
 
+import '../widgets/custom_button.dart';
+import '../widgets/custom_text.dart';
+
 enum AuthEnum {
   signin,
   signup
@@ -20,6 +23,17 @@ class _AuthScreenState extends State<AuthScreen> {
   final _signUpKey = GlobalKey<FormState>();
   final _signInKey = GlobalKey<FormState>();
 
+  final TextEditingController _emailTxt = TextEditingController();
+  final TextEditingController _passwordTxt = TextEditingController();
+  final TextEditingController _nameTxt = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailTxt.dispose();
+    _passwordTxt.dispose();
+    _nameTxt.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +43,7 @@ class _AuthScreenState extends State<AuthScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
                   'Welcome',
@@ -38,6 +53,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               ListTile(
+                tileColor: _auth == AuthEnum.signup ? Declarations.backgroundColor : Declarations.greyBackgroundColor,
                 title: const Text("New Customer", style: TextStyle(fontWeight: FontWeight.bold),),
                 leading: Radio(
                   activeColor: Declarations.secondaryColor,
@@ -51,13 +67,28 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               if (_auth == AuthEnum.signup)
-                Form(
-                    key: _signUpKey,
-                    child: Column (
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Declarations.backgroundColor,
+                  child: Form(
+                      key: _signUpKey,
+                      child: Column (
+                          children: [
+                            CustomText(controller: _nameTxt, hinTxt: 'fullName',),
+                            const SizedBox(height: 10,),
+                            CustomText(controller: _emailTxt, hinTxt: 'Email',),
+                            const SizedBox(height: 10,),
+                            CustomText(controller: _passwordTxt, hinTxt: 'password',),
+                            const SizedBox(height: 10,),
+                            CustomButton(text: "Sign Up" , onTap: () {
 
-                    )
+                            }, )
+                          ],
+                      )
+                  ),
                 ),
               ListTile(
+                tileColor: _auth == AuthEnum.signin ? Declarations.backgroundColor : Declarations.greyBackgroundColor,
                 title: const Text("Have an account ?", style: TextStyle(fontWeight: FontWeight.bold),),
                 leading: Radio(
                   activeColor: Declarations.secondaryColor,
@@ -69,7 +100,25 @@ class _AuthScreenState extends State<AuthScreen> {
                     });
                   },
                 ),
-              )
+              ),
+              if (_auth == AuthEnum.signin)
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Declarations.backgroundColor,
+                  child: Form(
+                      key: _signUpKey,
+                      child: Column (
+                        children: [
+                          CustomText(controller: _emailTxt, hinTxt: 'Email',),
+                          const SizedBox(height: 10,),
+                          CustomText(controller: _passwordTxt, hinTxt: 'password',),
+                          const SizedBox(height: 10,),
+                          CustomButton(text: "Sign In" , onTap: () {
+                          }, )
+                        ],
+                      )
+                  ),
+                ),
             ],
           ),
         ),
