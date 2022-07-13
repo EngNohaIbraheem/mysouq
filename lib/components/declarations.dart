@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String myUri01 = "http://localhost:3020";
+String myUri01 = "http://10.0.2.2:3020";
 
 class Declarations {
 

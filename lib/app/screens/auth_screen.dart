@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_souq/app/services/auth_service.dart';
 import 'package:my_souq/components/declarations.dart';
 
 import '../widgets/custom_button.dart';
@@ -22,6 +23,7 @@ class _AuthScreenState extends State<AuthScreen> {
   AuthEnum _auth = AuthEnum.signup;
   final _signUpKey = GlobalKey<FormState>();
   final _signInKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
 
   final TextEditingController _emailTxt = TextEditingController();
   final TextEditingController _passwordTxt = TextEditingController();
@@ -33,6 +35,13 @@ class _AuthScreenState extends State<AuthScreen> {
     _emailTxt.dispose();
     _passwordTxt.dispose();
     _nameTxt.dispose();
+  }
+
+  void singUpUser() {
+    authService.signUpUser(context: context,
+        email: _emailTxt.text,
+        password: _passwordTxt.text,
+        name: _nameTxt.text);
   }
 
   @override
@@ -81,8 +90,11 @@ class _AuthScreenState extends State<AuthScreen> {
                             CustomText(controller: _passwordTxt, hinTxt: 'password',),
                             const SizedBox(height: 10,),
                             CustomButton(text: "Sign Up" , onTap: () {
-
-                            }, )
+                              if (_signUpKey.currentState!.validate()) {
+                                singUpUser();
+                              }
+                            },
+                            )
                           ],
                       )
                   ),

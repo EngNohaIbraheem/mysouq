@@ -24,8 +24,11 @@ class CustomText extends StatelessWidget {
             )
         ),
       ),
-      validator: (valdate) {
-
+      validator: (val) {
+        if ( val == null || val.isEmpty) {
+          return 'Enter your $hinTxt';
+        }
+        return null;
       },
     );
   }
